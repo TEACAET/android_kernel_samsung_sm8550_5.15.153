@@ -28,10 +28,6 @@
  
  LOCALVERSION=-android13-8
  
- if [ "$LTO" == "thin" ]; then
-   LOCALVERSION+="-thin"
- fi
- 
  ARGS="
  CC=clang
  ARCH=arm64
@@ -48,12 +44,7 @@
    -d KDP \
    -d SECURITY_DEFEX \
    -d INTEGRITY \
-   -d FIVE \
-   -d TRIM_UNUSED_KSYMS
- 
- if [ "$LTO" = "thin" ]; then
-   ./scripts/config --file out/.config -e LTO_CLANG_THIN -d LTO_CLANG_FULL
- fi
+   -d FIVE 
  
  make -j$(nproc) -C $(pwd) O=$(pwd)/out ${ARGS}
  
